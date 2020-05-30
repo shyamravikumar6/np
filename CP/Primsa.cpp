@@ -38,7 +38,7 @@ public:
     }
 };
 int main(){
-    ifstream file("lol.txt");
+    
     int E,V;cin>>E>>V;
     vector<ii> R[V];int s,d,w;
     for(int i=0;i<E;++i){
