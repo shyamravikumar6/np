@@ -418,3 +418,12 @@ virtual_mem
 	
     * The signal will be sent to the CPU to continue the program execution and it will place the process back into ready state
 
+
+### Cache Memory in Computer Organization
+
+- Cache memory increases the accessing speed of   CPU.
+
+
+
+
+- It is not a technique but a memory unit i.e a  storage device. In cache memory, recently used  data is copied. Whenever the program is ready to  be executed, it is fetched from main memory and  then copied to the cache memory. But, if its copy  is already present in the cache memory then the program is directly executed.
