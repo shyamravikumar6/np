@@ -427,3 +427,16 @@ virtual_mem
 
 
 - It is not a technique but a memory unit i.e a  storage device. In cache memory, recently used  data is copied. Whenever the program is ready to  be executed, it is fetched from main memory and  then copied to the cache memory. But, if its copy  is already present in the cache memory then the program is directly executed.
+
+
+## Inverted page table in operating systems 
+
+
+  - Most of the Operating Systems implement a separate pagetable for each process, i.e. for ‘n’ number of processes running on a Multiprocessing/ Timesharing operating system, there are ‘n’ number of pagetables stored in the memory. Sometimes when a process is very large in size and it occupies virtual memory then with the size of the process, it’s pagetable size also increases substantially.
+
+
+
+### Inverted Page table 
+```
+- An alternate approach is to use the Inverted Page Table structure that consists of one-page table entry for every frame of the main memory. So the number of page table entries in the Inverted Page Table reduces to the number of frames in physical memory and a single page table is used to represent the paging information of all the processes. 
+```
