@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-#POSTGRE SQL    
-=======
 # POSTGRE SQL    
->>>>>>> 519c8971bce270f5df7033e1c55d09bf30755f6c
 - post gre sql two name can be concatinated by using some special syntax like 
 
 first_name || '' || last_name  AS  full_name
