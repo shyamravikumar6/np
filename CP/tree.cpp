@@ -1,4 +1,5 @@
 #include<iostream>
+
 using namespace std;
 struct node{
 int data;
@@ -13,6 +14,7 @@ node* newnode( int val){
         root->data=val;
         root->left=NULL;
         root->right=NULL;
+        
     }
     return root;
 }

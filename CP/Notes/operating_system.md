@@ -437,6 +437,87 @@ virtual_mem
 
 
 ### Inverted Page table 
-```
+---
 - An alternate approach is to use the Inverted Page Table structure that consists of one-page table entry for every frame of the main memory. So the number of page table entries in the Inverted Page Table reduces to the number of frames in physical memory and a single page table is used to represent the paging information of all the processes. 
-```
+
+--- 
+
+
+    Page number – It specifies the page number range of the logical address.
+    Process id – An inverted page table contains the address space information of all the processes in execution. Since two different processes can have similar set of virtual addresses, it becomes necessary in Inverted Page Table to store a process Id of each process to identify it’s address space uniquely. This is done by using the combination of PId and Page Number. So this Process Id acts as an address space identifier and ensures that a virtual page for a particular process is mapped correctly to the corresponding physical frame.
+    Control bits – These bits are used to store extra paging-related information. These include the valid bit, dirty bit, reference bits, protection and locking information bits.
+    Chained pointer – It may be possible sometime that two or more processes share a part of main memory. In this case, two or more logical pages map to same Page Table Entry then a chaining pointer is used to map the details of these logical pages to the root page table.
+
+
+### Page fault handling in operating systems 
+
+A page fault occurs when the trys to access the data or piece of code from the main memory .
+ during that this process goes on in operating systems. 
+ 1) refercence 
+ 2) Trap 
+ 3) Page on backing store 
+ 4) bringing the missing page	
+ 5) Reset page table 
+ ![](https://media.geeksforgeeks.org/wp-content/uploads/121-1.png)
+
+
+
+    - The computer hardware traps to the kernel and program counter (PC) is saved on the stack. 
+	
+	- Current instruction state information is saved in CPU registers.
+   
+    - An assembly program is started to save the general registers and other volatile information to keep the OS from destroying it.
+    
+	- Operating system finds that a page fault has occurred and tries to find out which virtual page is needed. 
+	
+	- Some times hardware register contains this required information. If not, the operating system must retrieve PC, fetch instruction and find out what it was doing when the fault occurred.
+    
+	- Once virtual address caused page fault is known, system checks to see if address is valid and checks if there is no protection access problem.
+    
+	- If the virtual address is valid, the system checks to see if a page frame is free. If no frames are free, the page replacement algorithm is run to remove a page.
+    
+	- If frame selected is dirty, page is scheduled for transfer to disk, context switch takes place, fault process is suspended and another process is made to run until disk transfer is completed.
+   
+   - As soon as page frame is clean, operating system looks up disk address where needed page is, schedules disk operation to bring it in.
+    When disk interrupt indicates page has arrived, page tables are updated to reflect its position, and frame marked as being in normal state.
+   
+-  Faulting instruction is backed up to state it had when it began and PC is reset. Faulting is scheduled, operating system returns to routine that called it.
+   
+   - Assembly Routine reloads register and other state information, returns to user space to continue execution.
+
+
+## Fage fault algorthim in operating systems 
+- Page Fault – A page fault happens when a running program accesses a memory page that is mapped into the virtual address space, but not loaded in physical memory.
+
+### page replacement algorithm
+#### First in first out -(FIFO)
+- <B><i>First In First Out (FIFO) –</i></B>
+  This is the simplest page replacement algorithm. In this algorithm, the operating system keeps track of all pages in the memory in a queue, the oldest page is in the front of the queue. When a page needs to be replaced page in the front of the queue is selected for 
+  removal.
+
+
+Example-1  Consider page reference string 1, 3,  0, 3, 5, 6 with 3 page frames.Find number of page faults.
+
+
+
+![](https://media.geeksforgeeks.org/wp-content/uploads/20190412160604/fifo2.png)
+
+
+
+- Initially all slots are empty, so when 1, 3, 0 came they are allocated to the empty slots —> 3 Page Faults.
+
+- when 3 comes, it is already in  memory so —> 0 Page Faults.
+Then 5 comes, it is not available in  memory so it replaces the oldest page slot i.e 1. 
+- —>1 Page Fault.
+ 6 comes, it is also not available in memory so it replaces the oldest page slot i.e 3 —>1 Page Fault.
+- Finally when 3 come it is not avilable so   it   replaces 0 1 page fault.
+
+#### Belady’s anomaly –
+ Belady’s anomaly proves that it is possible to have more page faults when increasing the number of page frames while using the First in First Out (FIFO) page replacement algorithm.  For example, if we consider reference string 3, 2, 1, 0, 3, 2, 4, 3, 2, 1, 0, 4 and 3 slots, we get 9 total page faults, but if we increase slots to 4, we get 10 page faults. 
+
+
+ #### Program for Least Recently Used (LRU) Page Replacement algorithm
+
+ - In operating systems that use paging for memory management, page replacement algorithm are needed to decide which page needed to be replaced when new page comes in.
+ -  Whenever a new page is referred and not present in memory, page fault occurs and Operating System replaces  one of the existing pages with newly needed page. Different page replacement algorithms suggest different ways to decide which page to replace. 
+ - The target for all algorithms is to reduce number of page faults.

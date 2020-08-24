@@ -1,28 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
+int tt;
 
-class Solution {
-public:
-    bool checkStraightLine(vector<vector<int>>& coor) {
-        int x=coor[0][0],y=coor[0][1];
-        if(coor.size()==1) return false;
-        if(coor.size()==2)return true;
-        int y1=coor[1][1],x1=coor[1][0],y2,x2;
-        
-        int  b=y1-y,a=x1-x;
-		cout<<b/a;
-        for(int i=2;i<coor.size();++i){
-             y2=coor[i][1];x2=coor[i][0];
-              if((y2-y1)*a!=b*(x2-x1)) return false;
-        }
-        return true;
-    }
-};
+
+string s1,s2,s3;
+int**A;
+
+void editdistance(){
+   cin>>s1>>s2;
+   A =new int*[s1.size()+1];
+   for(int i=0;i<=s1.size();++i){
+       A[i] = new int[s2.size()+1]; A[i]={0};
+   }     
+     for(int i=1;i<=s1.size();++i){
+         for(int j=1;j<=s2.size();++j){
+              if(i-1==0) A[i][j]=j-1;
+               if(j-1==0) A[i][j]=i-1;
+                 if(s1[i-1]==s2[j-1]) A[i][j]=A[i-1][j-1];
+              else {
+                      A[i][j] =1+min({A[i-1][j],A[i][j-1],A[i-1][j-1]});
+                       s3.append(s2,s2[j]);   
+              }
+         }
+     }
+           cout<<s3<<"/n";
+    
+}
 
 int main(){
-	vector<vector<int>> coor={{-3,-2},{-1,-2},{2,-2},{-2,-2},{0,-2}};
-	Solution* D = new Solution() ;
-	if(D->checkStraightLine(coor)) cout<<"true";
-	else cout<<"false";
-	 
+    cin>>tt;  int j=0;
+    while(tt--){
+    
+         cout<<"Case #"<<++j<<": ";
+            editdistance();
+         
+        
+    }
+    
 }
